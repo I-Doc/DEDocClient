@@ -8,7 +8,10 @@ class CreateDocument extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      document: {},
+      document: {
+        name: '',
+        template: '',
+      },
       templates: [],
     };
   }
@@ -24,7 +27,10 @@ class CreateDocument extends Component {
     const name = event.target.name;
 
     this.setState({
-      [name]: value,
+      document: {
+        ...this.state.document,
+        [name]: value,
+      },
     });
   };
 
@@ -33,14 +39,23 @@ class CreateDocument extends Component {
 
     this.setState({ error: null });
 
-    DocumentsService.create(this.state.document)
-      .then(() => {
-        this.props.login();
-        this.props.history.push('/');
-      })
-      .catch(err => {
-        this.setState({ error: err.response.data.error });
-      });
+    const reader = new FileReader();
+    reader.addEventListener(
+      'load',
+      () => {
+        DocumentsService.create({ ...this.state.document, data: reader.result })
+          .then(() => {
+            this.props.login();
+            this.props.history.push('/');
+          })
+          .catch(err => {
+            this.setState({ error: err.response.data.error });
+          });
+      },
+      false,
+    );
+
+    reader.readAsDataURL(this.fileInput.files[0]);
   };
 
   render() {
@@ -60,16 +75,32 @@ class CreateDocument extends Component {
               onChange={this.handleInputChange}
               required
             />
-            <FormControl.Feedback />
           </FormGroup>
 
           <FormGroup controlId="template">
-            <FormControl componentClass="select">
-              <option value={null}>Оберіть шаблон</option>
+            <FormControl
+              componentClass="select"
+              required
+              onChange={this.handleInputChange}
+              value={document.template}
+            >
+              <option value="" disabled>
+                Оберіть шаблон
+              </option>
               {templates.map(template => (
                 <option value={template.id}>{template.name}</option>
               ))}
             </FormControl>
+          </FormGroup>
+
+          <FormGroup>
+            <FormControl
+              type="file"
+              required
+              ref={input => {
+                this.fileInput = input;
+              }}
+            />
           </FormGroup>
 
           <Button type="submit">Створити</Button>
