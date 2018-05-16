@@ -2,8 +2,10 @@ import React, { Component } from 'react';
 import { Alert, Button, FormControl, FormGroup, Well } from 'react-bootstrap';
 import { withRouter } from 'react-router-dom';
 
-import AuthService from './AuthService';
-import { AuthContext } from '../shared/AuthContext';
+import AuthService from '../AuthService';
+import { AuthContext } from '../../shared/AuthContext';
+
+import './Login.css';
 
 class Login extends Component {
   constructor(props, context) {
@@ -43,7 +45,7 @@ class Login extends Component {
     const { username, password, error } = this.state;
 
     return (
-      <Well bsSize="large">
+      <Well bsSize="large" className="login-card">
         {error && <Alert bsStyle="danger">{error}</Alert>}
 
         <h1>Вхід</h1>
@@ -66,14 +68,16 @@ class Login extends Component {
               type="password"
               name="password"
               value={password}
-              placeholder="Введіть ваш пароль"
+              placeholder="Введіть пароль"
               onChange={this.handleInputChange}
               required
             />
             <FormControl.Feedback />
           </FormGroup>
 
-          <Button type="submit">Увійти</Button>
+          <Button className="login-button" type="submit">
+            Увійти
+          </Button>
         </form>
       </Well>
     );

@@ -9,7 +9,7 @@ import './shared/interceptors/interceptors';
 import PrivateRoute from './shared/PrivateRoute';
 import { AuthContext } from './shared/AuthContext';
 
-import Login from './auth/Login';
+import Login from './auth/Login/Login';
 import Registration from './auth/Registration';
 import Documents from './documents/Documents';
 import Templates from './templates/Templates';
