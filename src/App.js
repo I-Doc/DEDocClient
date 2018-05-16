@@ -13,6 +13,7 @@ import Login from './auth/Login/Login';
 import Registration from './auth/Registration';
 import Documents from './documents/Documents';
 import Templates from './templates/Templates';
+import CreateDocument from './documents/CreateDocument';
 
 class App extends Component {
   constructor(props) {
@@ -61,6 +62,10 @@ class App extends Component {
                     <LinkContainer to="/templates">
                       <NavItem>Шаблони</NavItem>
                     </LinkContainer>
+
+                    <LinkContainer to="/new">
+                      <NavItem>Створити документ</NavItem>
+                    </LinkContainer>
                   </Nav>
                 )}
 
@@ -87,6 +92,7 @@ class App extends Component {
               <Route path="/login" component={Login} />
               <Route path="/registration" component={Registration} />
               <PrivateRoute path="/templates" component={Templates} />
+              <PrivateRoute path="/new" component={CreateDocument} />
             </div>
           </div>
         </Router>
