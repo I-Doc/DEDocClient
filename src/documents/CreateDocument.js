@@ -8,10 +8,8 @@ class CreateDocument extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      document: {
-        name: '',
-        template: '',
-      },
+      name: '',
+      template: '',
       templates: [],
     };
   }
@@ -27,10 +25,7 @@ class CreateDocument extends Component {
     const name = event.target.name;
 
     this.setState({
-      document: {
-        ...this.state.document,
-        [name]: value,
-      },
+      [name]: value,
     });
   };
 
@@ -43,7 +38,11 @@ class CreateDocument extends Component {
     reader.addEventListener(
       'load',
       () => {
-        DocumentsService.create({ ...this.state.document, data: reader.result })
+        DocumentsService.create({
+          name: this.state.name,
+          template: Number(this.state.template),
+          data: reader.result,
+        })
           .then(() => {
             this.props.login();
             this.props.history.push('/');
@@ -54,12 +53,12 @@ class CreateDocument extends Component {
       },
       false,
     );
-
+    console.log(this.fileInput.files);
     reader.readAsDataURL(this.fileInput.files[0]);
   };
 
   render() {
-    const { document, templates } = this.state;
+    const { name, template, templates } = this.state;
 
     return (
       <Well>
@@ -70,7 +69,7 @@ class CreateDocument extends Component {
             <FormControl
               type="text"
               name="name"
-              value={document.name}
+              value={name}
               placeholder="Введіть назву документа"
               onChange={this.handleInputChange}
               required
@@ -81,15 +80,17 @@ class CreateDocument extends Component {
             <FormControl
               componentClass="select"
               name="template"
-              required
+              value={template}
               onChange={this.handleInputChange}
-              value={document.template}
+              required
             >
               <option value="" disabled>
                 Оберіть шаблон
               </option>
               {templates.map(template => (
-                <option value={template.id}>{template.name}</option>
+                <option key={template.id} value={template.id}>
+                  {template.name}
+                </option>
               ))}
             </FormControl>
           </FormGroup>
@@ -98,7 +99,7 @@ class CreateDocument extends Component {
             <FormControl
               type="file"
               required
-              ref={input => {
+              inputRef={input => {
                 this.fileInput = input;
               }}
             />
