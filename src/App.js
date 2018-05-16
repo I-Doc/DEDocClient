@@ -12,6 +12,7 @@ import { AuthContext } from './shared/AuthContext';
 import Login from './auth/Login';
 import Registration from './auth/Registration';
 import Documents from './documents/Documents';
+import Templates from './templates/Templates';
 
 class App extends Component {
   constructor(props) {
@@ -53,8 +54,12 @@ class App extends Component {
               <Navbar.Collapse>
                 {isAuthenticated && (
                   <Nav>
-                    <LinkContainer to="/">
+                    <LinkContainer exact to="/">
                       <NavItem>Мої документи</NavItem>
+                    </LinkContainer>
+
+                    <LinkContainer to="/templates">
+                      <NavItem>Шаблони</NavItem>
                     </LinkContainer>
                   </Nav>
                 )}
@@ -81,6 +86,7 @@ class App extends Component {
               <PrivateRoute exact path="/" component={Documents} />
               <Route path="/login" component={Login} />
               <Route path="/registration" component={Registration} />
+              <PrivateRoute path="/templates" component={Templates} />
             </div>
           </div>
         </Router>
