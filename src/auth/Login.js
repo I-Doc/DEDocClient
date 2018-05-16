@@ -27,6 +27,8 @@ class Login extends Component {
   handleSubmit = event => {
     event.preventDefault();
 
+    this.setState({ error: null });
+
     AuthService.login(this.state.username, this.state.password)
       .then(() => {
         this.props.login();
