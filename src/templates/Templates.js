@@ -13,9 +13,9 @@ class Templates extends Component {
   }
 
   async componentDidMount() {
-    const documents = await TemplatesService.find();
+    const templates = await TemplatesService.find();
 
-    this.setState({ documents });
+    this.setState({ templates });
   }
 
   render() {

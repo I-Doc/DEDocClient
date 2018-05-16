@@ -80,6 +80,7 @@ class CreateDocument extends Component {
           <FormGroup controlId="template">
             <FormControl
               componentClass="select"
+              name="template"
               required
               onChange={this.handleInputChange}
               value={document.template}
