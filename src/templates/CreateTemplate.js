@@ -1,23 +1,14 @@
 import React, { Component } from 'react';
 import { Alert, Button, FormControl, FormGroup, Well } from 'react-bootstrap';
 
-import DocumentsService from './DocumentsService';
-import TemplatesService from '../templates/TemplatesService';
+import TemplatesService from './TemplatesService';
 
-class CreateDocument extends Component {
+class CreateTemplate extends Component {
   constructor(props) {
     super(props);
     this.state = {
       name: '',
-      template: '',
-      templates: [],
     };
-  }
-
-  async componentDidMount() {
-    const templates = await TemplatesService.find();
-
-    this.setState({ templates });
   }
 
   handleInputChange = event => {
@@ -38,13 +29,12 @@ class CreateDocument extends Component {
     reader.addEventListener(
       'load',
       () => {
-        DocumentsService.create({
+        TemplatesService.create({
           name: this.state.name,
-          template: Number(this.state.template),
           data: reader.result,
         })
           .then(() => {
-            this.props.history.push('/');
+            this.props.history.push('/templates');
           })
           .catch(err => {
             this.setState({ error: err.response.data.errors.join('<br/>') });
@@ -57,7 +47,7 @@ class CreateDocument extends Component {
   };
 
   render() {
-    const { name, template, templates, error } = this.state;
+    const { name, error } = this.state;
 
     return (
       <Well>
@@ -67,7 +57,7 @@ class CreateDocument extends Component {
           </Alert>
         )}
 
-        <h1>Новий документ</h1>
+        <h1>Новий шаблон</h1>
 
         <form onSubmit={this.handleSubmit}>
           <FormGroup controlId="name">
@@ -75,29 +65,10 @@ class CreateDocument extends Component {
               type="text"
               name="name"
               value={name}
-              placeholder="Введіть назву документа"
+              placeholder="Введіть назву шаблона"
               onChange={this.handleInputChange}
               required
             />
-          </FormGroup>
-
-          <FormGroup controlId="template">
-            <FormControl
-              componentClass="select"
-              name="template"
-              value={template}
-              onChange={this.handleInputChange}
-              required
-            >
-              <option value="" disabled>
-                Оберіть шаблон
-              </option>
-              {templates.map(template => (
-                <option key={template.id} value={template.id}>
-                  {template.name}
-                </option>
-              ))}
-            </FormControl>
           </FormGroup>
 
           <FormGroup>
@@ -117,4 +88,4 @@ class CreateDocument extends Component {
   }
 }
 
-export default CreateDocument;
+export default CreateTemplate;

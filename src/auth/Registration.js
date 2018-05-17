@@ -40,7 +40,7 @@ class Registration extends Component {
         this.props.history.push('/login');
       })
       .catch(err => {
-        this.setState({ error: err.response.data.errors.join('\n') });
+        this.setState({ error: err.response.data.errors.join('<br/>') });
       });
   };
 
@@ -49,7 +49,11 @@ class Registration extends Component {
 
     return (
       <Well bsSize="large" className="auth-card">
-        {error && <Alert bsStyle="danger">{error}</Alert>}
+        {error && (
+          <Alert bsStyle="danger">
+            <span dangerouslySetInnerHTML={{ __html: error }} />
+          </Alert>
+        )}
 
         <h1>Реєстрація</h1>
 

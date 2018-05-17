@@ -15,6 +15,7 @@ import Documents from './documents/Documents';
 import Templates from './templates/Templates';
 import CreateDocument from './documents/CreateDocument';
 import AuthService from './auth/AuthService';
+import CreateTemplate from './templates/CreateTemplate';
 
 class App extends Component {
   constructor(props) {
@@ -64,13 +65,19 @@ class App extends Component {
                       </NavItem>
                     </LinkContainer>
 
-                    <LinkContainer to="/templates">
+                    <LinkContainer exact to="/templates">
                       <NavItem>Шаблони</NavItem>
                     </LinkContainer>
 
-                    <LinkContainer to="/new">
-                      <NavItem>Створити документ</NavItem>
-                    </LinkContainer>
+                    {isAdmin ? (
+                      <LinkContainer exact to="/new">
+                        <NavItem>Створити документ</NavItem>
+                      </LinkContainer>
+                    ) : (
+                      <LinkContainer exact to="/templates/new">
+                        <NavItem>Створити шаблон</NavItem>
+                      </LinkContainer>
+                    )}
                   </Nav>
                 )}
 
@@ -94,10 +101,15 @@ class App extends Component {
 
             <div className="container">
               <PrivateRoute exact path="/" component={Documents} />
-              <Route path="/login" component={Login} />
-              <Route path="/registration" component={Registration} />
-              <PrivateRoute path="/templates" component={Templates} />
-              <PrivateRoute path="/new" component={CreateDocument} />
+              <Route exact path="/login" component={Login} />
+              <Route exact path="/registration" component={Registration} />
+              <PrivateRoute exact path="/templates" component={Templates} />
+              <PrivateRoute exact path="/new" component={CreateDocument} />
+              <PrivateRoute
+                exact
+                path="/templates/new"
+                component={CreateTemplate}
+              />
             </div>
           </div>
         </Router>
