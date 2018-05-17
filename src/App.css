@@ -1,3 +1,39 @@
 .text-center {
   text-align: center;
 }
+
+.navbar-inverse {
+  border-color: transparent;
+  background-color: #407fa3;
+  font-weight: 700;
+  height: 65px;
+  box-shadow: 0px 2px 3px #6e6e6e;
+}
+
+.navbar-inverse .navbar-nav > .active > a,
+.navbar-inverse .navbar-nav > .active > a:hover,
+.navbar-inverse .navbar-nav > .active > a:focus {
+  background-color: #256589;
+}
+
+.navbar-inverse .navbar-brand {
+  color: white;
+  height: 65px;
+  font-size: 20px;
+  padding: 23px 15px 7px 15px;
+}
+
+span {
+  vertical-align: middle;
+}
+
+.navbar-inverse .navbar-nav > li > a {
+  color: white;
+  height: 65px;
+  font-size: 12px;
+  padding: 23px 15px 7px 15px;
+}
+
+.navbar-inverse .navbar-nav > li > a:hover {
+  background-color: #256589;
+}
