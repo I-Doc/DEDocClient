@@ -25,13 +25,23 @@ class App extends Component {
 
     this.state = {
       isAuthenticated,
-      login: () => {
-        return AuthService.profile().then(profile => {
-          this.setState({ isAuthenticated: true, isAdmin: profile.is_admin });
-        });
-      },
+      login: this.login,
     };
   }
+
+  async componentDidMount() {
+    if (this.state.isAuthenticated) {
+      const profile = await AuthService.profile();
+
+      this.setState({ isAdmin: profile.is_admin });
+    }
+  }
+
+  login = () => {
+    return AuthService.profile().then(profile => {
+      this.setState({ isAuthenticated: true, isAdmin: profile.is_admin });
+    });
+  };
 
   logout = () => {
     this.setState({
