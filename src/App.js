@@ -9,11 +9,14 @@ import './shared/interceptors/interceptors';
 import PrivateRoute from './shared/PrivateRoute';
 import { AuthContext } from './shared/AuthContext';
 
-import Login from './auth/Login/Login';
+import Login from './auth/Login';
 import Registration from './auth/Registration';
 import Documents from './documents/Documents';
 import Templates from './templates/Templates';
 import Profile from './profile/Profile';
+import CreateDocument from './documents/CreateDocument';
+import AuthService from './auth/AuthService';
+import CreateTemplate from './templates/CreateTemplate';
 
 class App extends Component {
   constructor(props) {
@@ -23,11 +26,23 @@ class App extends Component {
 
     this.state = {
       isAuthenticated,
-      login: () => {
-        this.setState({ isAuthenticated: true });
-      },
+      login: this.login,
     };
   }
+
+  async componentDidMount() {
+    if (this.state.isAuthenticated) {
+      const profile = await AuthService.profile();
+
+      this.setState({ isAdmin: profile.is_admin });
+    }
+  }
+
+  login = () => {
+    return AuthService.profile().then(profile => {
+      this.setState({ isAuthenticated: true, isAdmin: profile.is_admin });
+    });
+  };
 
   logout = () => {
     this.setState({
@@ -38,7 +53,7 @@ class App extends Component {
   };
 
   render() {
-    const { isAuthenticated } = this.state;
+    const { isAuthenticated, isAdmin } = this.state;
 
     return (
       <AuthContext.Provider value={this.state}>
@@ -56,16 +71,27 @@ class App extends Component {
                 {isAuthenticated && (
                   <Nav>
                     <LinkContainer exact to="/">
-                      <NavItem>Мої документи</NavItem>
+                      <NavItem>
+                        {isAdmin ? 'Документи' : 'Мої документи'}
+                      </NavItem>
                     </LinkContainer>
 
-                    <LinkContainer to="/templates">
+                    <LinkContainer exact to="/templates">
                       <NavItem>Шаблони</NavItem>
                     </LinkContainer>
 
                     <LinkContainer to="/profile">
                       <NavItem>Особистий кабінет</NavItem>
                     </LinkContainer>
+                    {isAdmin ? (
+                      <LinkContainer exact to="/templates/new">
+                        <NavItem>Створити шаблон</NavItem>
+                      </LinkContainer>
+                    ) : (
+                      <LinkContainer exact to="/new">
+                        <NavItem>Створити документ</NavItem>
+                      </LinkContainer>
+                    )}
                   </Nav>
                 )}
 
@@ -93,6 +119,15 @@ class App extends Component {
               <Route path="/registration" component={Registration} />
               <PrivateRoute path="/templates" component={Templates} />
               <PrivateRoute path="/profile" component={Profile} />
+              <Route exact path="/login" component={Login} />
+              <Route exact path="/registration" component={Registration} />
+              <PrivateRoute exact path="/templates" component={Templates} />
+              <PrivateRoute exact path="/new" component={CreateDocument} />
+              <PrivateRoute
+                exact
+                path="/templates/new"
+                component={CreateTemplate}
+              />
             </div>
           </div>
         </Router>
