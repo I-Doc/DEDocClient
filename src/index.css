@@ -4,3 +4,37 @@ body {
   font-family: sans-serif;
   background-color: rgb(233, 233, 233);
 }
+
+.auth-card {
+  max-width: 500px;
+  margin: 120px auto 0;
+  padding: 24px 56px 32px;
+  background-color: #407fa3;
+  border-radius: 8px;
+}
+
+.auth-card-submit-button {
+  min-width: 130px;
+  background-color: #256589 !important;
+  border-color: transparent;
+  color: white;
+  font-size: 12px;
+  font-weight: 700;
+  border-radius: 8px;
+  padding: 10px 27px 10px 27px;
+}
+
+.auth-card-submit-button:hover {
+  border-color: transparent;
+  background-color: white !important;
+  color: #256589;
+}
+
+.form-control {
+  border-radius: 8px;
+}
+
+h1 {
+  color: white;
+  font-weight: 700;
+}

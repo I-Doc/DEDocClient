@@ -115,9 +115,6 @@ class App extends Component {
 
             <div className="container">
               <PrivateRoute exact path="/" component={Documents} />
-              <Route path="/login" component={Login} />
-              <Route path="/registration" component={Registration} />
-              <PrivateRoute path="/templates" component={Templates} />
               <PrivateRoute path="/profile" component={Profile} />
               <Route exact path="/login" component={Login} />
               <Route exact path="/registration" component={Registration} />
