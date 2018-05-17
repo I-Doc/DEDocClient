@@ -80,6 +80,9 @@ class Profile extends Component {
                     <Row>
                       <Button className="profile-button">На розгляді</Button>
                     </Row>
+                    <Row>
+                      <Button className="profile-button">Відхилені</Button>
+                    </Row>
                   </Panel.Body>
                 </Panel>
               </div>
