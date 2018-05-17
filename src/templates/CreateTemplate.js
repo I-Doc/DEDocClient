@@ -42,7 +42,7 @@ class CreateTemplate extends Component {
       },
       false,
     );
-    console.log(this.fileInput.files);
+
     reader.readAsDataURL(this.fileInput.files[0]);
   };
 

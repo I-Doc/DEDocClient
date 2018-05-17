@@ -27,27 +27,32 @@ class Templates extends Component {
           templates.length > 0 ? (
             <Grid fluid>
               <Row>
-                <Col xs={4}>
+                <Col xs={3}>
                   <h4>Назва</h4>
                 </Col>
-                <Col xs={4}>
+                <Col xs={3}>
                   <h4>Дата створення</h4>
                 </Col>
-                <Col xs={4}>
+                <Col xs={3}>
                   <h4>Дата редагування</h4>
                 </Col>
               </Row>
 
               {templates.map(template => (
                 <Row key={template.id}>
-                  <Col xs={4}>
+                  <Col xs={3}>
                     {template.id}. {template.name}
                   </Col>
-                  <Col xs={4}>
+                  <Col xs={3}>
                     {DateTime.fromISO(template.cdate).toFormat(DATE_FORMAT)}
                   </Col>
-                  <Col xs={4}>
+                  <Col xs={3}>
                     {DateTime.fromISO(template.mdate).toFormat(DATE_FORMAT)}
+                  </Col>
+                  <Col xs={3}>
+                    <a href={template.data} download={template.name}>
+                      Завантажити
+                    </a>
                   </Col>
                 </Row>
               ))}
