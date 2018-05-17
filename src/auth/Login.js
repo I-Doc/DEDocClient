@@ -44,7 +44,7 @@ class Login extends Component {
       <Well bsSize="large" className="auth-card">
         {error && <Alert bsStyle="danger">{error}</Alert>}
 
-        <h1>Вхід</h1>
+        <h1 className="auth-title">Вхід</h1>
 
         <form onSubmit={this.handleSubmit}>
           <FormGroup controlId="username">

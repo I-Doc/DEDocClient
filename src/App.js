@@ -13,6 +13,7 @@ import Login from './auth/Login';
 import Registration from './auth/Registration';
 import Documents from './documents/Documents';
 import Templates from './templates/Templates';
+import Profile from './profile/Profile';
 import CreateDocument from './documents/CreateDocument';
 import AuthService from './auth/AuthService';
 import CreateTemplate from './templates/CreateTemplate';
@@ -79,6 +80,9 @@ class App extends Component {
                       <NavItem>Шаблони</NavItem>
                     </LinkContainer>
 
+                    <LinkContainer to="/profile">
+                      <NavItem>Особистий кабінет</NavItem>
+                    </LinkContainer>
                     {isAdmin ? (
                       <LinkContainer exact to="/templates/new">
                         <NavItem>Створити шаблон</NavItem>
@@ -111,6 +115,7 @@ class App extends Component {
 
             <div className="container">
               <PrivateRoute exact path="/" component={Documents} />
+              <PrivateRoute path="/profile" component={Profile} />
               <Route exact path="/login" component={Login} />
               <Route exact path="/registration" component={Registration} />
               <PrivateRoute exact path="/templates" component={Templates} />
