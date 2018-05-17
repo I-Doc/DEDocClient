@@ -70,12 +70,12 @@ class App extends Component {
                     </LinkContainer>
 
                     {isAdmin ? (
-                      <LinkContainer exact to="/new">
-                        <NavItem>Створити документ</NavItem>
-                      </LinkContainer>
-                    ) : (
                       <LinkContainer exact to="/templates/new">
                         <NavItem>Створити шаблон</NavItem>
+                      </LinkContainer>
+                    ) : (
+                      <LinkContainer exact to="/new">
+                        <NavItem>Створити документ</NavItem>
                       </LinkContainer>
                     )}
                   </Nav>
