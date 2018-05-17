@@ -14,6 +14,7 @@ import Registration from './auth/Registration';
 import Documents from './documents/Documents';
 import Templates from './templates/Templates';
 import CreateDocument from './documents/CreateDocument';
+import AuthService from './auth/AuthService';
 
 class App extends Component {
   constructor(props) {
@@ -24,7 +25,9 @@ class App extends Component {
     this.state = {
       isAuthenticated,
       login: () => {
-        this.setState({ isAuthenticated: true });
+        AuthService.profile().then(profile => {
+          this.setState({ isAuthenticated: true, isAdmin: profile.is_admin });
+        });
       },
     };
   }
@@ -38,7 +41,7 @@ class App extends Component {
   };
 
   render() {
-    const { isAuthenticated } = this.state;
+    const { isAuthenticated, isAdmin } = this.state;
 
     return (
       <AuthContext.Provider value={this.state}>
@@ -56,7 +59,9 @@ class App extends Component {
                 {isAuthenticated && (
                   <Nav>
                     <LinkContainer exact to="/">
-                      <NavItem>Мої документи</NavItem>
+                      <NavItem>
+                        {isAdmin ? 'Документи' : 'Мої документи'}
+                      </NavItem>
                     </LinkContainer>
 
                     <LinkContainer to="/templates">
