@@ -27,7 +27,7 @@
   },
   "scripts": {
     "precommit": "lint-staged",
-    "prestart": "react-scripts build",
+    "postinstall": "react-scripts build",
     "start": "serve -s build",
     "start:dev": "react-scripts start",
     "build": "react-scripts build",
