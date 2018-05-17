@@ -23,10 +23,6 @@
   padding: 23px 15px 7px 15px;
 }
 
-span {
-  vertical-align: middle;
-}
-
 .navbar-inverse .navbar-nav > li > a {
   color: white;
   height: 65px;
