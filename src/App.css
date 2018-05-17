@@ -1,3 +1,13 @@
 .text-center {
   text-align: center;
 }
+
+.auth-card {
+  max-width: 500px;
+  margin: 120px auto 0;
+  padding: 24px 56px 32px;
+}
+
+.auth-card-submit-button {
+  min-width: 100px;
+}

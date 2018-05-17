@@ -9,7 +9,7 @@ import './shared/interceptors/interceptors';
 import PrivateRoute from './shared/PrivateRoute';
 import { AuthContext } from './shared/AuthContext';
 
-import Login from './auth/Login/Login';
+import Login from './auth/Login';
 import Registration from './auth/Registration';
 import Documents from './documents/Documents';
 import Templates from './templates/Templates';
@@ -25,7 +25,7 @@ class App extends Component {
     this.state = {
       isAuthenticated,
       login: () => {
-        AuthService.profile().then(profile => {
+        return AuthService.profile().then(profile => {
           this.setState({ isAuthenticated: true, isAdmin: profile.is_admin });
         });
       },

@@ -2,10 +2,8 @@ import React, { Component } from 'react';
 import { Alert, Button, FormControl, FormGroup, Well } from 'react-bootstrap';
 import { withRouter } from 'react-router-dom';
 
-import AuthService from '../AuthService';
-import { AuthContext } from '../../shared/AuthContext';
-
-import './Login.css';
+import AuthService from './AuthService';
+import { AuthContext } from '../shared/AuthContext';
 
 class Login extends Component {
   constructor(props, context) {
@@ -32,10 +30,8 @@ class Login extends Component {
     this.setState({ error: null });
 
     AuthService.login(this.state.username, this.state.password)
-      .then(() => {
-        this.props.login();
-        this.props.history.push('/');
-      })
+      .then(() => this.props.login())
+      .then(() => this.props.history.push('/'))
       .catch(err => {
         this.setState({ error: err.response.data.error });
       });
@@ -45,7 +41,7 @@ class Login extends Component {
     const { username, password, error } = this.state;
 
     return (
-      <Well bsSize="large" className="login-card">
+      <Well bsSize="large" className="auth-card">
         {error && <Alert bsStyle="danger">{error}</Alert>}
 
         <h1>Вхід</h1>
@@ -60,7 +56,6 @@ class Login extends Component {
               onChange={this.handleInputChange}
               required
             />
-            <FormControl.Feedback />
           </FormGroup>
 
           <FormGroup controlId="password">
@@ -72,10 +67,9 @@ class Login extends Component {
               onChange={this.handleInputChange}
               required
             />
-            <FormControl.Feedback />
           </FormGroup>
 
-          <Button className="login-button" type="submit">
+          <Button className="auth-card-submit-button" type="submit">
             Увійти
           </Button>
         </form>
