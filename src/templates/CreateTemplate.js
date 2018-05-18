@@ -50,14 +50,14 @@ class CreateTemplate extends Component {
     const { name, error } = this.state;
 
     return (
-      <Well>
+      <Well className="auth-card b-card">
         {error && (
           <Alert bsStyle="danger">
             <span dangerouslySetInnerHTML={{ __html: error }} />
           </Alert>
         )}
 
-        <h1>Новий шаблон</h1>
+        <h1 className="auth-title">Новий шаблон</h1>
 
         <form onSubmit={this.handleSubmit}>
           <FormGroup controlId="name">
@@ -73,6 +73,7 @@ class CreateTemplate extends Component {
 
           <FormGroup>
             <FormControl
+              className="download-file"
               type="file"
               required
               inputRef={input => {
@@ -81,7 +82,9 @@ class CreateTemplate extends Component {
             />
           </FormGroup>
 
-          <Button type="submit">Створити</Button>
+          <Button type="submit" className="auth-card-submit-button">
+            Створити
+          </Button>
         </form>
       </Well>
     );

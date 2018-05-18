@@ -55,7 +55,7 @@ class Registration extends Component {
           </Alert>
         )}
 
-        <h1>Реєстрація</h1>
+        <h1 className="auth-title">Реєстрація</h1>
 
         <form onSubmit={this.handleSubmit}>
           <FormGroup controlId="name">
