@@ -7,16 +7,16 @@
 }
 
 .panel-default {
-  border: 0px;
+  border: 0;
 }
 
 .panel {
   border-radius: 5px;
-  box-shadow: 0px 5px 8px #aaaaaa;
+  box-shadow: 0 5px 8px #aaaaaa;
 }
 
 .list-group-item {
-  border: 0px;
+  border: 0;
   color: #888;
   font-weight: 700;
 }
@@ -34,7 +34,7 @@
 }
 
 .profile-button {
-  border: 0px;
+  border: 0;
   border-radius: 5px;
   background-color: #407fa3;
   color: white;

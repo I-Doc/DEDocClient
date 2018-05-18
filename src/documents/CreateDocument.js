@@ -108,6 +108,7 @@ class CreateDocument extends Component {
               inputRef={input => {
                 this.fileInput = input;
               }}
+              className="download-file"
             />
           </FormGroup>
 

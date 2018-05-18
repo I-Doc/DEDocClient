@@ -28,6 +28,7 @@ class Documents extends Component {
         template => template.id === document.template,
       );
 
+      document.stateId = document.state;
       document.state = states.find(state => state.id === document.state);
     });
 
@@ -40,11 +41,10 @@ class Documents extends Component {
 
     DocumentsService.changeState(stateId, document).then(() => {
       const documents = this.state.documents.map(
-        d => (d.id !== document.id ? d : { ...d, state }),
+        d => (d.id !== document.id ? d : { ...d, state, stateId }),
       );
 
       this.setState({ documents });
-      this.forceUpdate();
     });
   };
 
@@ -101,7 +101,7 @@ class Documents extends Component {
                         <FormControl
                           componentClass="select"
                           name="state"
-                          value={String(document.state.id)}
+                          value={document.stateId}
                           onChange={e => this.changeState(e, document)}
                           required
                         >
