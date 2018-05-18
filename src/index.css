@@ -38,3 +38,9 @@ body {
   color: white;
   font-weight: 700;
 }
+
+.text-ellipsis {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}

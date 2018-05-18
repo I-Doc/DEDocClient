@@ -40,7 +40,7 @@ class Templates extends Component {
 
               {templates.map(template => (
                 <Row key={template.id}>
-                  <Col xs={3}>
+                  <Col xs={3} className="text-ellipsis" title={template.name}>
                     {template.id}. {template.name}
                   </Col>
                   <Col xs={3}>
