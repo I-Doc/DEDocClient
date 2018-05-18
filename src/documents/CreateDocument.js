@@ -72,6 +72,7 @@ class CreateDocument extends Component {
         <form onSubmit={this.handleSubmit}>
           <FormGroup controlId="name">
             <FormControl
+              className="download-file"
               type="text"
               name="name"
               value={name}

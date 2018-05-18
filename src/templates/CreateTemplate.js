@@ -73,6 +73,7 @@ class CreateTemplate extends Component {
 
           <FormGroup>
             <FormControl
+              className="download-file"
               type="file"
               required
               inputRef={input => {

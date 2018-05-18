@@ -80,3 +80,11 @@ body {
   text-overflow: ellipsis;
   overflow: hidden;
 }
+
+.download-file {
+  color: white;
+}
+
+.document-state {
+  margin-top: -7px;
+}

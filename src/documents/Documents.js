@@ -53,30 +53,30 @@ class Documents extends Component {
     const { isAdmin } = this.props;
 
     return (
-      <Well className="text-center">
+      <Well className="text-center doc-card">
         {isLoaded ? (
           documents.length > 0 ? (
             <Grid fluid>
               <Row>
                 <Col xs={2}>
-                  <h4>Назва</h4>
+                  <h4 className="doc-table-title">Назва</h4>
                 </Col>
                 <Col xs={2}>
-                  <h4>Дата створення</h4>
+                  <h4 className="doc-table-title">Дата створення</h4>
                 </Col>
                 <Col xs={2}>
-                  <h4>Дата редагування</h4>
+                  <h4 className="doc-table-title">Дата редагування</h4>
                 </Col>
                 <Col xs={2}>
-                  <h4>Шаблон</h4>
+                  <h4 className="doc-table-title">Шаблон</h4>
                 </Col>
                 <Col xs={2}>
-                  <h4>Статус</h4>
+                  <h4 className="doc-table-title">Статус</h4>
                 </Col>
               </Row>
 
               {documents.map(document => (
-                <Row key={document.id}>
+                <Row key={document.id} className="doc-item">
                   <Col xs={2} className="text-ellipsis" title={document.name}>
                     {document.id}. {document.name}
                   </Col>
@@ -97,7 +97,7 @@ class Documents extends Component {
                     {!isAdmin ? (
                       document.state.name
                     ) : (
-                      <FormGroup controlId="state">
+                      <FormGroup controlId="state" className="document-state">
                         <FormControl
                           componentClass="select"
                           name="state"
@@ -115,7 +115,11 @@ class Documents extends Component {
                     )}
                   </Col>
                   <Col xs={2}>
-                    <a href={document.data} download={document.name}>
+                    <a
+                      href={document.data}
+                      download={document.name}
+                      className="download-button"
+                    >
                       Завантажити
                     </a>
                   </Col>
