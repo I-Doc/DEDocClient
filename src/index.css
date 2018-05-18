@@ -11,6 +11,8 @@ body {
   padding: 24px 56px 32px;
   background-color: #407fa3;
   border-radius: 8px;
+  box-shadow: 0 5px 10px #888;
+  border: 0px;
 }
 
 .auth-card-submit-button {
@@ -37,4 +39,39 @@ body {
 .auth-title {
   color: white;
   font-weight: 700;
+}
+
+.b-card {
+  max-width: 1000px;
+}
+
+.doc-card {
+  background-color: white !important;
+  color: #838383;
+  font-weight: 700;
+  box-shadow: 0 5px 10px #888;
+}
+
+.download-button {
+  background-color: #407fa3;
+  color: white;
+  padding: 10px 25px;
+  border-radius: 3px;
+  box-shadow: 0 2px 4px #888;
+}
+
+.download-button:hover {
+  text-decoration: none;
+  background-color: #115a85;
+  color: white;
+}
+
+.doc-item {
+  margin-bottom: 25px;
+}
+
+.doc-table-title {
+  font-weight: 700;
+  margin-bottom: 20px;
+  font-size: 24px;
 }

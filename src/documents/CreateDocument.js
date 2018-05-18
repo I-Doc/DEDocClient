@@ -60,14 +60,14 @@ class CreateDocument extends Component {
     const { name, template, templates, error } = this.state;
 
     return (
-      <Well>
+      <Well className="auth-card b-card">
         {error && (
           <Alert bsStyle="danger">
             <span dangerouslySetInnerHTML={{ __html: error }} />
           </Alert>
         )}
 
-        <h1>Новий документ</h1>
+        <h1 className="auth-title">Новий документ</h1>
 
         <form onSubmit={this.handleSubmit}>
           <FormGroup controlId="name">
@@ -110,7 +110,9 @@ class CreateDocument extends Component {
             />
           </FormGroup>
 
-          <Button type="submit">Створити</Button>
+          <Button type="submit" className="auth-card-submit-button">
+            Створити
+          </Button>
         </form>
       </Well>
     );
