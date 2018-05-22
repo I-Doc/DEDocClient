@@ -25,23 +25,22 @@ class Registration extends Component {
     });
   };
 
-  handleSubmit = event => {
+  handleSubmit = async event => {
     event.preventDefault();
 
     this.setState({ error: null });
 
-    AuthService.register({
-      name: this.state.name,
-      birthdate: this.state.birthdate,
-      username: this.state.username,
-      password: this.state.password,
-    })
-      .then(() => {
-        this.props.history.push('/login');
-      })
-      .catch(err => {
-        this.setState({ error: err.response.data.errors.join('<br/>') });
+    try {
+      await AuthService.register({
+        name: this.state.name,
+        birthdate: this.state.birthdate,
+        username: this.state.username,
+        password: this.state.password,
       });
+      await this.props.history.push('/login');
+    } catch (err) {
+      this.setState({ error: err.response.data.errors.join('<br/>') });
+    }
   };
 
   render() {

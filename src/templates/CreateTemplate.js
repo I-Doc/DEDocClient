@@ -20,7 +20,7 @@ class CreateTemplate extends Component {
     });
   };
 
-  handleSubmit = event => {
+  handleSubmit = async event => {
     event.preventDefault();
 
     this.setState({ error: null });
@@ -28,17 +28,16 @@ class CreateTemplate extends Component {
     const reader = new FileReader();
     reader.addEventListener(
       'load',
-      () => {
-        TemplatesService.create({
-          name: this.state.name,
-          data: reader.result,
-        })
-          .then(() => {
-            this.props.history.push('/templates');
-          })
-          .catch(err => {
-            this.setState({ error: err.response.data.errors.join('<br/>') });
+      async () => {
+        try {
+          await TemplatesService.create({
+            name: this.state.name,
+            data: reader.result,
           });
+          await this.props.history.push('/templates');
+        } catch (err) {
+          this.setState({ error: err.response.data.errors.join('<br/>') });
+        }
       },
       false,
     );

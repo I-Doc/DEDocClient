@@ -24,17 +24,18 @@ class Login extends Component {
     });
   };
 
-  handleSubmit = event => {
+  handleSubmit = async event => {
     event.preventDefault();
 
     this.setState({ error: null });
 
-    AuthService.login(this.state.username, this.state.password)
-      .then(() => this.props.login())
-      .then(() => this.props.history.push('/'))
-      .catch(err => {
-        this.setState({ error: err.response.data.error });
-      });
+    try {
+      await AuthService.login(this.state.username, this.state.password);
+      await this.props.login();
+      await this.props.history.push('/');
+    } catch (err) {
+      this.setState({ error: err.response.data.error });
+    }
   };
 
   render() {

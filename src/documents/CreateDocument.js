@@ -37,18 +37,17 @@ class CreateDocument extends Component {
     const reader = new FileReader();
     reader.addEventListener(
       'load',
-      () => {
-        DocumentsService.create({
-          name: this.state.name,
-          template: Number(this.state.template),
-          data: reader.result,
-        })
-          .then(() => {
-            this.props.history.push('/');
-          })
-          .catch(err => {
-            this.setState({ error: err.response.data.errors.join('<br/>') });
+      async () => {
+        try {
+          await DocumentsService.create({
+            name: this.state.name,
+            template: Number(this.state.template),
+            data: reader.result,
           });
+          await this.props.history.push('/');
+        } catch (err) {
+          this.setState({ error: err.response.data.errors.join('<br/>') });
+        }
       },
       false,
     );

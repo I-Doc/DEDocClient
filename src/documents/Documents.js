@@ -35,17 +35,17 @@ class Documents extends Component {
     this.setState({ isLoaded: true, documents, states, templates });
   }
 
-  changeState = (e, document) => {
-    const stateId = Number(e.target.value);
+  changeState = async (event, document) => {
+    const stateId = Number(event.target.value);
     const state = this.state.states.map(s => s.id === stateId);
 
-    DocumentsService.changeState(stateId, document).then(() => {
-      const documents = this.state.documents.map(
-        d => (d.id !== document.id ? d : { ...d, state, stateId }),
-      );
+    await DocumentsService.changeState(stateId, document);
 
-      this.setState({ documents });
-    });
+    const documents = this.state.documents.map(
+      d => (d.id !== document.id ? d : { ...d, state, stateId }),
+    );
+
+    this.setState({ documents });
   };
 
   render() {
